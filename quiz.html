@@ -1,0 +1,205 @@
+<!DOCTYPE html><html><head>
+    <title>QUIZ</title>
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <style type="text/css">
+        body{
+            background-image: url("https://www.rolandberger.com/img/Tiles/KIQuiz_Search_result_teaser_01.jpg");
+            background-size: cover;
+            color: rgb(226, 208, 208);
+            font-family: 'Nerko One', cursive;
+            font-weight: bolder;
+            }
+        #start {
+            text-align: center;
+         }
+        #button {
+            position: absolute;
+            top: 50%;
+            left: 45%;
+            width: 10%;
+            height: 50px;
+            font-size: 20px;
+            background-color: rgba(99, 219, 228, 0.986);
+        }    
+        #quiz{
+            visibility: hidden;
+            background-color: #0933336b;
+            width: 40%;
+            margin-left: 10px;
+            padding: 10px;
+            border-radius: 10px;
+            border: 5px solid black;
+            font-size: 20px;
+            float: left;
+        }
+        #time{
+            background-color: #0933336b;
+            border-radius: 10px;
+            border: 5px solid black;
+            width: 100px;
+            height: 50px;
+            float: left;
+            visibility: hidden;
+            margin-left: 20px;
+            line-height: 50px;
+            text-align: center;
+        }
+        #textbox{
+            border:none;
+            border-radius: 10px;
+            width: 80%;
+            height: 25px;
+            font-size: 20px;
+        }
+        #sub{
+            margin-top: 50px;
+            visibility: hidden;
+            float: left;
+            left: -20%;
+            position: relative;
+            background-color: #093333bd;
+            border-radius: 10px;
+            border: 5px solid black;
+            width: 30%;
+            padding-left: 10px;
+            font-size: 20px;
+        }
+        #picture{
+            height: 200px;
+            width: 200px;
+        }
+    </style>
+</head>
+<body>
+    <div id="start">
+        <button id="button" onclick="question()" onmousedown="sound.play()">Start</button>
+    </div>
+    <div>
+        <form id="quiz" name="quiz">
+            <p>1. The answer for this qn is "HTML"?</p>
+            <input id="textbox" type="text" name="txt">
+    
+            <p id="q2">2. The answer for this qn is "b"?</p>
+            <input type="radio" name="qn1" id="qA2" value="a">
+            <label>A</label><br>
+            <input type="radio" name="qn1" id="qA2" value="b">
+            <label>B</label><br>
+            <input type="radio" name="qn1" id="qA2" value="c">
+            <label>C</label><br>
+            <input type="radio" name="qn1" id="qA2" value="d">
+            <label>D</label><br>
+    
+            <p>3. The correct option is 1:</p>
+            <input type="radio" id="c1" value="1" name="qn2">
+            <label>1</label><br>
+            <input type="radio" id="c1" value="2" name="qn2">
+            <label>2</label><br>
+            <input type="radio" id="c1" value="3" name="qn2">
+            <label>3</label><br>
+            <input type="radio" id="c1" value="4" name="qn2">
+            <label>4</label><br>
+    
+            <p>4. The answer for this qn is 1</p>
+            <input type="radio" id="c21" value="1" name="qn3">
+            <label>1</label><br>
+            <input type="radio" id="c21" value="2" name="qn3">
+            <label>2</label><br>
+            <input type="radio" id="c21" value="3" name="qn3">
+            <label>3</label><br>
+            <input type="radio" id="c21" value="4" name="qn3">
+            <label>4</label><br>
+    
+            <p>5. The full form of CSS is: <input id="textbox1" type="text" name="txt1">  Style Sheet.</p>
+            <br>
+            <input name="but" id="btn" type="button" onclick="check()" onmousedown="sound.pause()" value="SUBMIT" style="width:100px; height:40px">
+        </form>
+    </div>
+    <div id="time"></div>
+    <div id="sub">
+        <p id="correct"></p>
+        <p id="message"></p>
+        <center><img id="picture"></center>
+        <p>Answers:</p>
+        <pre>1. HTML
+2. B
+3. 1
+4. 1
+5. Cascading
+        </pre>
+    </div>
+    <script type="text/javascript">
+      var sound = new Audio(); 
+      sound.src = "30sec.mp3";
+      
+    function question(){
+        document.getElementById("quiz").style.visibility="visible";
+        document.getElementById("time").style.visibility="visible";
+        document.getElementById("start").style.visibility="hidden";
+        timer();
+    }
+        function timer(){
+        var c = 30;
+        var interval = setInterval(function(){
+            document.getElementById("time").innerHTML=c;
+            c--;
+            if (c<0){
+                clearInterval(interval);
+                document.getElementById("time").innerHTML=0;
+                
+                check();
+            }
+        }, 1000)
+    }
+        function check(){
+            document.getElementById("quiz").style.visibility="hidden";
+            document.getElementById("time").style.visibility="hidden";
+            var correct= 0;
+            var q1= document.quiz.txt.value;
+            var q2= document.quiz.qn1.value;
+            var q3= document.quiz.qn2.value;
+            var q4= document.quiz.qn3.value;
+            var q5= document.quiz.txt1.value;
+            if (q1=="HTML"){
+                correct++;
+            }
+            if (q2=="b"){
+                correct++;
+            }
+            if (q3=="1"){
+                correct++;
+            }
+            if (q4=="1"){
+                correct++;
+            }
+            if (q5=="Cascading"){
+                correct++;
+            }
+            var message = ["Hurray!! You got full marks","Amazing!!", "Your performance was good.","Better luck next time." ,"You gotta practice more!!"];
+            var pic=["https://media1.giphy.com/media/dAcQAuZJLfgqL2u1aS/giphy.gif","https://media0.giphy.com/media/KzQERR8hMYEvGwVARQ/giphy.gif","https://rankedbyvotes.com/wp-content/uploads/Community-Education.gif","https://i.pinimg.com/originals/8b/36/28/8b362821e077380c3e45f006f48bf741.gif","https://media1.giphy.com/media/j5WNDiz8VRwhSWr3oW/giphy.gif"]
+            var i;
+            if (correct == 0) {
+                 i = 4;
+            }
+            if (correct > 0 && correct < 3) {
+                i = 3;
+            }
+            if (correct==3){
+                i = 2;
+            }
+            if (correct==4){
+                i = 1;
+            }
+
+            if (correct == 5) {
+                i = 0;
+            }
+            document.getElementById("sub").style.visibility="visible";
+            document.getElementById("correct").innerHTML="You are all done! Your score is "+correct;
+            document.getElementById("message").innerHTML = message[i];
+            document.getElementById("picture").src = pic[i];
+        }
+    </script>
+
+
+
+</body></html>
